@@ -19,6 +19,8 @@ namespace EmbeddedRecordCreator
         private ICommand? _exportCommand;
         public ICommand ExportCommand => _exportCommand ??= new RelayCommand(_ => ExportRecordsToFile());
 
+        public IEnumerable<EventType> EventTypes => Enum.GetValues(typeof(EventType)).Cast<EventType>();
+
         public bool ImportOverwrite { get; set; } = true;
         public ObservableCollection<Record> Records { get; set; } = new();
 

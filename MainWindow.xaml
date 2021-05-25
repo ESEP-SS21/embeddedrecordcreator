@@ -4,12 +4,23 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:EmbeddedRecordCreator"
+        xmlns:model="clr-namespace:EmbeddedRecordCreator.Model"
+        xmlns:System="clr-namespace:System;assembly=System.Runtime"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
 
     <Window.DataContext>
         <local:MainWindowViewModel />
     </Window.DataContext>
+
+    <Window.Resources>
+        <ObjectDataProvider x:Key="enumValues"
+                            MethodName="GetValues" ObjectType="{x:Type System:Enum}">
+            <ObjectDataProvider.MethodParameters>
+                <x:Type TypeName="model:EventType" />
+            </ObjectDataProvider.MethodParameters>
+        </ObjectDataProvider>
+    </Window.Resources>
 
     <Grid>
         <Grid.RowDefinitions>
@@ -35,7 +46,20 @@
 
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Time" Binding="{Binding Time, Mode=TwoWay}" />
-                <DataGridTextColumn Header="Type" Binding="{Binding Evnt.Type, Mode=TwoWay}" />
+
+                <DataGridTemplateColumn Header="Type">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding Evnt.Type}"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                    <DataGridTemplateColumn.CellEditingTemplate>
+                        <DataTemplate>
+                            <ComboBox ItemsSource="{Binding Source = {StaticResource enumValues}}" SelectedItem="{Binding Evnt.Type, Mode=TwoWay}" />
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellEditingTemplate>
+                </DataGridTemplateColumn>
+
                 <DataGridTextColumn Header="Payload" Binding="{Binding Evnt.Payl, Mode=TwoWay}" />
                 <DataGridTextColumn Header="Broadcast" Binding="{Binding Evnt.Broad, Mode=TwoWay}" />
             </DataGrid.Columns>
