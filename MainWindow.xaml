@@ -45,34 +45,33 @@
             </DataGrid.ItemsSource>
 
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Time" Binding="{Binding Time, Mode=TwoWay}" />
+                <DataGridTextColumn Header="Time (ms)" Binding="{Binding Time, Mode=TwoWay}" />
 
                 <DataGridTemplateColumn Header="Type">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <TextBlock Text="{Binding Evnt.Type}"/>
+                            <TextBlock Text="{Binding Evnt.Type}" />
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                     <DataGridTemplateColumn.CellEditingTemplate>
                         <DataTemplate>
-                            <ComboBox ItemsSource="{Binding Source = {StaticResource enumValues}}" SelectedItem="{Binding Evnt.Type, Mode=TwoWay}" />
+                            <ComboBox ItemsSource="{Binding Source = {StaticResource enumValues}}"
+                                      SelectedItem="{Binding Evnt.Type, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
                         </DataTemplate>
                     </DataGridTemplateColumn.CellEditingTemplate>
                 </DataGridTemplateColumn>
 
-                <DataGridTextColumn Header="Payload" Binding="{Binding Evnt.Payl, Mode=TwoWay}" />
-                <DataGridTextColumn Header="Broadcast" Binding="{Binding Evnt.Broad, Mode=TwoWay}" />
-            </DataGrid.Columns>
+                <DataGridTextColumn Header="Payload" Binding="{Binding Evnt.Payl, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
 
-            <!-- <DataGrid.RowDetailsTemplate> -->
-            <!--     <DataTemplate> -->
-            <!--         <StackPanel> -->
-            <!--             <TextBlock Text="{Binding Path=Event.Payl}" Margin="10" /> -->
-            <!--             <TextBlock Text="{Binding Path=Event.Broad}" Margin="10" /> -->
-            <!--             <TextBlock Text="{Binding Path=Event.Evnt}" Margin="10" /> -->
-            <!--         </StackPanel> -->
-            <!--     </DataTemplate> -->
-            <!-- </DataGrid.RowDetailsTemplate> -->
+                <DataGridTemplateColumn Header="Broadcast">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <CheckBox IsChecked="{Binding Evnt.Broad, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+
+            </DataGrid.Columns>
 
         </DataGrid>
     </Grid>
