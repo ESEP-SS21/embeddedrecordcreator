@@ -1,6 +1,6 @@
 ﻿namespace EmbeddedRecordCreator.Model
 {
-    public record Event
+    public class Event
     {
         public EventType Evnt { get; set; }
         public int Payl { get; set; }

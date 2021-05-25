@@ -16,9 +16,15 @@
             <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
-        <StackPanel Orientation="Horizontal" Grid.Row="0">
-            <Button Command="{Binding OpenFileCommand}">Open File</Button>
-            <Button Command="{Binding SaveFileCommand}">Save File</Button>
+        <StackPanel Orientation="Vertical">
+            <StackPanel Orientation="Horizontal" Grid.Row="0">
+                <Button Command="{Binding ImportCommand}">Import</Button>
+                <Button Command="{Binding ExportCommand}">Export</Button>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Grid.Row="0">
+                <RadioButton IsChecked="{Binding ImportOverwrite, Mode=TwoWay}">Overwrite</RadioButton>
+                <RadioButton>Append</RadioButton>
+            </StackPanel>
         </StackPanel>
 
         <DataGrid Grid.Row="1" AutoGenerateColumns="False">
