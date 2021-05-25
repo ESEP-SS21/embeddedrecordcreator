@@ -17,10 +17,33 @@
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
         <StackPanel Orientation="Horizontal" Grid.Row="0">
-            <Button>Open File</Button>
-            <Button>Save File</Button>
+            <Button Command="{Binding OpenFileCommand}">Open File</Button>
+            <Button Command="{Binding SaveFileCommand}">Save File</Button>
         </StackPanel>
 
-        <DataGrid Grid.Row="1" ItemsSource="{Binding Records}"/>
+        <DataGrid Grid.Row="1" AutoGenerateColumns="False">
+
+            <DataGrid.ItemsSource>
+                <Binding Path="Records" />
+            </DataGrid.ItemsSource>
+
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Time" Binding="{Binding Time, Mode=TwoWay}" />
+                <DataGridTextColumn Header="Type" Binding="{Binding Event.Evnt, Mode=TwoWay}" />
+                <DataGridTextColumn Header="Payload" Binding="{Binding Event.Payl, Mode=TwoWay}" />
+                <DataGridTextColumn Header="Broadcast" Binding="{Binding Event.Broad, Mode=TwoWay}" />
+            </DataGrid.Columns>
+
+            <!-- <DataGrid.RowDetailsTemplate> -->
+            <!--     <DataTemplate> -->
+            <!--         <StackPanel> -->
+            <!--             <TextBlock Text="{Binding Path=Event.Payl}" Margin="10" /> -->
+            <!--             <TextBlock Text="{Binding Path=Event.Broad}" Margin="10" /> -->
+            <!--             <TextBlock Text="{Binding Path=Event.Evnt}" Margin="10" /> -->
+            <!--         </StackPanel> -->
+            <!--     </DataTemplate> -->
+            <!-- </DataGrid.RowDetailsTemplate> -->
+
+        </DataGrid>
     </Grid>
 </Window>
