@@ -27,52 +27,27 @@
             <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
+
         <StackPanel Orientation="Vertical">
-            <StackPanel Orientation="Horizontal" Grid.Row="0">
+            <StackPanel Orientation="Horizontal">
                 <Button Command="{Binding ImportCommand}">Import</Button>
                 <Button Command="{Binding ExportCommand}">Export</Button>
             </StackPanel>
-            <StackPanel Orientation="Horizontal" Grid.Row="0">
+            <StackPanel Orientation="Horizontal">
                 <RadioButton IsChecked="{Binding ImportOverwrite, Mode=TwoWay}">Overwrite</RadioButton>
                 <RadioButton>Append</RadioButton>
             </StackPanel>
         </StackPanel>
 
-        <DataGrid Grid.Row="1" AutoGenerateColumns="False">
-
-            <DataGrid.ItemsSource>
-                <Binding Path="Records" />
-            </DataGrid.ItemsSource>
-
+        <DataGrid Grid.Row="1" AutoGenerateColumns="False" ItemsSource="{Binding Path=Records}">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Time (ms)" Binding="{Binding Time, Mode=TwoWay}" />
-
-                <DataGridTemplateColumn Header="Type">
-                    <DataGridTemplateColumn.CellTemplate>
-                        <DataTemplate>
-                            <TextBlock Text="{Binding Evnt.Type}" />
-                        </DataTemplate>
-                    </DataGridTemplateColumn.CellTemplate>
-                    <DataGridTemplateColumn.CellEditingTemplate>
-                        <DataTemplate>
-                            <ComboBox ItemsSource="{Binding Source = {StaticResource enumValues}}"
-                                      SelectedItem="{Binding Evnt.Type, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
-                        </DataTemplate>
-                    </DataGridTemplateColumn.CellEditingTemplate>
-                </DataGridTemplateColumn>
-
+                <DataGridComboBoxColumn Header="Type" ItemsSource="{Binding Source={StaticResource enumValues}, Mode=OneTime}"
+                                        TextBinding="{Binding Evnt.Type}" />
                 <DataGridTextColumn Header="Payload" Binding="{Binding Evnt.Payl, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
-
-                <DataGridTemplateColumn Header="Broadcast">
-                    <DataGridTemplateColumn.CellTemplate>
-                        <DataTemplate>
-                            <CheckBox IsChecked="{Binding Evnt.Broad, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
-                        </DataTemplate>
-                    </DataGridTemplateColumn.CellTemplate>
-                </DataGridTemplateColumn>
-
+                <DataGridCheckBoxColumn Header="Broadcast" Binding="{Binding Evnt.Broad, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
             </DataGrid.Columns>
-
         </DataGrid>
     </Grid>
+
 </Window>
