@@ -2,7 +2,7 @@
 {
     public class Record
     {
-        public Event Event { get; set; }
+        public Evnt Evnt { get; set; }
         public long Time { get; set; }
     }
 }

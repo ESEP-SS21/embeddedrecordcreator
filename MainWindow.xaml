@@ -35,9 +35,9 @@
 
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Time" Binding="{Binding Time, Mode=TwoWay}" />
-                <DataGridTextColumn Header="Type" Binding="{Binding Event.Evnt, Mode=TwoWay}" />
-                <DataGridTextColumn Header="Payload" Binding="{Binding Event.Payl, Mode=TwoWay}" />
-                <DataGridTextColumn Header="Broadcast" Binding="{Binding Event.Broad, Mode=TwoWay}" />
+                <DataGridTextColumn Header="Type" Binding="{Binding Evnt.Type, Mode=TwoWay}" />
+                <DataGridTextColumn Header="Payload" Binding="{Binding Evnt.Payl, Mode=TwoWay}" />
+                <DataGridTextColumn Header="Broadcast" Binding="{Binding Evnt.Broad, Mode=TwoWay}" />
             </DataGrid.Columns>
 
             <!-- <DataGrid.RowDetailsTemplate> -->

@@ -30,8 +30,8 @@ namespace EmbeddedRecordCreator
 
         public MainWindowViewModel()
         {
-            Records.Add(new Record() {Event = new Event() {Broad = false, Payl = 4, Evnt = EventType.EVNT_ACK}});
-            Records.Add(new Record() {Event = new Event() {Broad = false, Payl = 43, Evnt = EventType.EVNT_WRN}});
+            Records.Add(new Record() {Evnt = new Evnt() {Broad = false, Payl = 4, Type = EventType.EVNT_ACK}});
+            Records.Add(new Record() {Evnt = new Evnt() {Broad = false, Payl = 43, Type = EventType.EVNT_WRN}});
         }
 
         private string Serialize()
