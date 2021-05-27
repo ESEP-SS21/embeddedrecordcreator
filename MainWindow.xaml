@@ -41,9 +41,9 @@
 
         <DataGrid Grid.Row="1" AutoGenerateColumns="False" ItemsSource="{Binding Path=Records}">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Time (ms)" Binding="{Binding Time, Mode=TwoWay}" />
+                <DataGridTextColumn Header="Time (ms)" Binding="{Binding Time, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
                 <DataGridComboBoxColumn Header="Type" ItemsSource="{Binding Source={StaticResource enumValues}, Mode=OneTime}"
-                                        TextBinding="{Binding Evnt.Type}" />
+                                        TextBinding="{Binding Evnt.Type, UpdateSourceTrigger=PropertyChanged}" />
                 <DataGridTextColumn Header="Payload" Binding="{Binding Evnt.Payl, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
                 <DataGridCheckBoxColumn Header="Broadcast" Binding="{Binding Evnt.Broad, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
             </DataGrid.Columns>
