@@ -4,7 +4,6 @@ using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using System.Text.Json;
-using System.Text.Json.Serialization;
 using System.Windows;
 using System.Windows.Input;
 using EmbeddedRecordCreator.Model;
@@ -26,8 +25,7 @@ namespace EmbeddedRecordCreator
 
         private const string FileFilter = "Json files (*.json)|*.json";
 
-        private readonly JsonSerializerOptions _jsonSerializerOptions = new()
-            {WriteIndented = true, Converters = {new JsonStringEnumConverter()}, PropertyNameCaseInsensitive = true};
+        private readonly JsonSerializerOptions _jsonSerializerOptions = new() {WriteIndented = true} ;
 
 
         public MainWindowViewModel()
