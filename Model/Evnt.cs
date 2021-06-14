@@ -53,6 +53,6 @@
         EVNT_CONN_LOST,
         EVNT_SRV_DONE,
         EVNT_HIST,
-        EVNT_RST_TO_SRT,
+        EVNT_RST_TO_SRT
     }
 }

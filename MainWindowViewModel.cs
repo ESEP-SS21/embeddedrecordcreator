@@ -13,26 +13,26 @@ namespace EmbeddedRecordCreator
 {
     public class MainWindowViewModel
     {
-        private ICommand? _importCommand;
-        public ICommand ImportCommand => _importCommand ??= new RelayCommand(_ => ImportRecordsFromFile());
+        private const string FileFilter = "Json files (*.json)|*.json";
+
+        private readonly JsonSerializerOptions _jsonSerializerOptions = new() {WriteIndented = true};
         private ICommand? _exportCommand;
+        private ICommand? _importCommand;
+
+
+        public MainWindowViewModel()
+        {
+            Records.Add(new Record {Evnt = new Evnt {Broad = false, Payl = 4, Type = EventType.EVNT_ACK}});
+            Records.Add(new Record {Evnt = new Evnt {Broad = false, Payl = 43, Type = EventType.EVNT_WRN}});
+        }
+
+        public ICommand ImportCommand => _importCommand ??= new RelayCommand(_ => ImportRecordsFromFile());
         public ICommand ExportCommand => _exportCommand ??= new RelayCommand(_ => ExportRecordsToFile());
 
         public IEnumerable<EventType> EventTypes => Enum.GetValues(typeof(EventType)).Cast<EventType>();
 
         public bool ImportOverwrite { get; set; } = true;
         public ObservableCollection<Record> Records { get; set; } = new();
-
-        private const string FileFilter = "Json files (*.json)|*.json";
-
-        private readonly JsonSerializerOptions _jsonSerializerOptions = new() {WriteIndented = true} ;
-
-
-        public MainWindowViewModel()
-        {
-            Records.Add(new Record() {Evnt = new Evnt() {Broad = false, Payl = 4, Type = EventType.EVNT_ACK}});
-            Records.Add(new Record() {Evnt = new Evnt() {Broad = false, Payl = 43, Type = EventType.EVNT_WRN}});
-        }
 
         private string Serialize()
         {
@@ -48,9 +48,10 @@ namespace EmbeddedRecordCreator
 
         private void ImportRecordsFromFile()
         {
-            var ofd = new OpenFileDialog() {Filter = FileFilter};
+            var ofd = new OpenFileDialog {Filter = FileFilter};
             if (ofd.ShowDialog() == false)
                 return;
+
             if (!File.Exists(ofd.FileName))
             {
                 MessageBox.Show("File does not exist", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
@@ -73,18 +74,14 @@ namespace EmbeddedRecordCreator
                 Records.Clear();
 
             foreach (Record record in records)
-            {
                 Records.Add(record);
-            }
         }
 
         private void ExportRecordsToFile()
         {
-            var sfd = new SaveFileDialog() {Filter = FileFilter};
+            var sfd = new SaveFileDialog {Filter = FileFilter};
             if (sfd.ShowDialog() == true)
-            {
                 File.WriteAllText(sfd.FileName, Serialize());
-            }
         }
     }
 }
