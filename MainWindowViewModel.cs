@@ -15,7 +15,7 @@ namespace EmbeddedRecordCreator
     {
         private const string FileFilter = "Json files (*.json)|*.json";
 
-        private readonly JsonSerializerOptions _jsonSerializerOptions = new() {WriteIndented = true};
+        private readonly JsonSerializerOptions _jsonSerializerOptions = new() {WriteIndented = true, PropertyNameCaseInsensitive = true};
         private ICommand? _exportCommand;
         private ICommand? _importCommand;
 
